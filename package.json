@@ -1,0 +1,24 @@
+{
+  "name": "strive-m5-d8-feb22",
+  "version": "1.0.0",
+  "description": "",
+  "main": "streams-examples.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nclBaz/strive-m5-d8-feb22.git"
+  },
+  "keywords": [],
+  "author": "Riccardo Gulin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nclBaz/strive-m5-d8-feb22/issues"
+  },
+  "homepage": "https://github.com/nclBaz/strive-m5-d8-feb22#readme",
+  "dependencies": {
+    "request": "^2.88.2"
+  }
+}
