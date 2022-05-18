@@ -6,7 +6,8 @@ import { CloudinaryStorage } from "multer-storage-cloudinary"
 import { pipeline } from "stream"
 import { createGzip } from "zlib"
 
-import { saveUsersAvatars, getBooksReadableStream } from "../../lib/fs-tools.js"
+import { saveUsersAvatars, getBooksReadableStream, getBooks } from "../../lib/fs-tools.js"
+import { getPDFReadableStream } from "../../lib/pdf-tools.js"
 
 const filesRouter = express.Router()
 
@@ -68,6 +69,24 @@ filesRouter.get("/booksJSON", (req, res, next) => {
     const transform = createGzip()
 
     pipeline(source, transform, destination, err => {
+      if (err) console.log(err)
+    })
+  } catch (error) {
+    next(error)
+  }
+})
+
+filesRouter.get("/pdf", async (req, res, next) => {
+  try {
+    // SOURCE (file on disk: pdf make library output) --> DESTINATION (http response: res)
+
+    res.setHeader("Content-Disposition", "attachment; filename=example.pdf") // This header tells the browser to open the "save file on disk" dialog
+
+    const books = await getBooks()
+    const source = getPDFReadableStream(books[0])
+    const destination = res
+
+    pipeline(source, destination, err => {
       if (err) console.log(err)
     })
   } catch (error) {
